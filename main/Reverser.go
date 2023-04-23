@@ -23,9 +23,11 @@ func (r *reverser) Init(context.Context) error {
 }
 
 func (r reverser) Reverse(ctx context.Context, s string) (string, error) {
-	if rev, err := r.cache.Get(ctx, s); err == nil {
+	rev, err := r.cache.Get(ctx, s)
+	if err == nil {
 		return rev, nil
 	}
+	r.Logger().Error("", err)
 
 	runes := []rune(s)
 	n := len(runes)
