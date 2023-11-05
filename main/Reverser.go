@@ -29,6 +29,9 @@ func (r reverser) Reverse(ctx context.Context, s string) (string, error) {
 	}
 	r.Logger().Error("", err)
 
+	// Number
+	addCount.Add(1.0)
+
 	runes := []rune(s)
 	n := len(runes)
 	for i := 0; i < n/2; i++ {
